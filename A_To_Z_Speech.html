@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color:darkcyan;
+    }
+    .contaner #left_box {
+        height: 700px;
+        width: 790px;
+        border: 3px solid red;
+        text-shadow: 0px 0px 20px greenyellow;
+    
+    }
+    #right_box {
+        height: 700px;
+        width: 720px;
+        border: 3px solid red;
+        margin-top: -705px;
+        margin-left: 790px;
+        background-color:blueviolet;
+    }
+    #left_box #msg {
+        height: 699px;
+        width: 789px;
+        text-align: center;
+        font-size: 400px;
+        
+        background-color:blueviolet;
+  
+        color: red;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+</style>
+<body onkeyup="getkey(event)">
+    <div class="contaner">
+        <div id="left_box" onclick="textToSpeech()">
+            <div id="msg"><img src="images.jpg"  height="500" width="520" 
+                style="padding: 40px;border-radius:15px; margin-top: 30px;"></div>
+        </div>
+        <div id="right_box"><img src="a_to_z.jpg" id="img1" height="600" width="620" 
+              style="padding: 40px;border-radius:10px;"></div>
+    </div>
+</body>
+<script>
+    function getkey(ev) {
+        var k = ev.key;
+   
+        var msg=document.getElementById('msg').innerHTML;
+        var vic=["Apple","Boll","Cat","Dog","Elephant","Fish","Grapes"
+        ,"Horse","Ice","Joker","Kite","Lion","Mango","Next","Orange","Parrot"
+        ,"Queen","Rabbit","Sun","Tiger","Umbrella","Vine","Watch","Xmastree",
+        "Yak","Zebra"]
+
+     //   convert is liye kiya hu kyuki jo 
+       // key hai vo Character hai aur arror index[0 to length]
+       //ISI  liye key ke  Charactor ko k-65[65-65]="Apple" me convert kar diya
+
+            var word = vic[k.charCodeAt(0) - 65];
+   if(speechSynthesis)
+   {
+   var  speech= new SpeechSynthesisUtterance();
+   speech.language="en-us";
+   speech.text=k+"for"+ word;
+   //0-2
+   speech.value=2;
+   //0-10
+   speech.rate=0.5;
+   speech.pitch=2;
+   window.speechSynthesis.speak(speech);   
+   }
+   else{
+    alert("Plz..feel");
+   }
+        if (k  >= 'A' && k <= 'Z'){
+            document.getElementById("msg").innerHTML = k;
+            var img = document.getElementById("img1").src=k+".jpg";
+            
+        } else {
+            document.getElementById('msg').innerHTML = 
+                "<span style='font-size:30px; color:black'>Plesss..Inter[A-Z]</span>";
+        }
+    }
+
+   
+</script>
+</html>
